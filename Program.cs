@@ -5,14 +5,19 @@ class Program
     static void Main()
     {
         // Variabel untuk mengontrol pengulangan program
-        bool repeat = true; 
+        bool repeat = true;
 
         // Loop ini akan terus berjalan selama repeat bernilai true
         while (repeat)
         {
             // Meminta pengguna untuk memasukkan jumlah bilangan Fibonacci yang ingin ditampilkan
             Console.Write("Masukkan jumlah bilangan Fibonacci yang ingin ditampilkan: ");
-            int n = int.Parse(Console.ReadLine()); // Mengubah input string menjadi integer
+            // Menangani kemungkinan kesalahan saat konversi input
+            if (!int.TryParse(Console.ReadLine(), out int n) || n < 0)
+            {
+                Console.WriteLine("Silakan masukkan angka bulat positif.");
+                continue; // Kembali ke awal loop jika input tidak valid
+            }
 
             // Inisialisasi variabel untuk menghitung bilangan Fibonacci
             int a = 0, b = 1, next;
@@ -25,7 +30,7 @@ class Program
                 Console.Write(a + " "); // Mencetak nilai a (bilangan Fibonacci saat ini)
 
                 // Menghitung bilangan Fibonacci berikutnya
-                next = a + b; 
+                next = a + b;
                 a = b; // Memperbarui nilai a
                 b = next; // Memperbarui nilai b
             }
